@@ -1,0 +1,15 @@
+{
+  "name": "gatitos-explosivos-web",
+  "version": "0.1.0",
+  "description": "Primera version web multijugador local inspirada en Exploding Kittens.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {}
+}

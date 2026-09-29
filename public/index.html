@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gatitos Explosivos Online</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="join" id="joinPanel">
+        <div>
+          <p class="eyebrow">Multijugador local</p>
+          <h1>Gatitos Explosivos</h1>
+          <p class="intro">Crea una sala, comparte el codigo y juega desde varios navegadores en la misma red.</p>
+        </div>
+        <form id="joinForm" class="join-form">
+          <label>Nombre <input id="nameInput" maxlength="24" autocomplete="nickname" required /></label>
+          <label>Sala <input id="roomInput" maxlength="16" value="GATITOS" required /></label>
+          <fieldset class="join-expansions">
+            <legend>Expansiones</legend>
+            <div id="joinExpansionPanel" class="expansion-panel"></div>
+          </fieldset>
+          <button type="submit">Entrar</button>
+        </form>
+      </section>
+
+      <section class="table hidden" id="gamePanel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Sala <span id="roomCode"></span></p>
+            <h2 id="statusTitle">Esperando jugadores</h2>
+            <div class="host-summary" id="hostSummary"></div>
+            <div class="expansion-summary" id="expansionSummary"></div>
+            <fieldset class="lobby-expansions" id="lobbyExpansions">
+              <legend>Expansiones de la sala</legend>
+              <div id="lobbyExpansionPanel" class="expansion-panel"></div>
+            </fieldset>
+          </div>
+          <div class="top-actions">
+            <button id="startBtn">Iniciar partida</button>
+            <button id="drawBtn">Robar carta</button>
+            <button id="retireBtn">Retirarse</button>
+          </div>
+        </header>
+        <div class="nope-banner hidden" id="nopeBanner"></div>
+
+        <section class="board">
+          <section class="center">
+            <div class="game-surface">
+              <div class="players" id="players"></div>
+              <div class="table-core">
+                <button id="deckButton" class="deck" title="Robar del mazo">
+                  <span id="deckCount">0</span>
+                  <small>mazo</small>
+                </button>
+                <button id="nopeBtn" class="nope-table-btn">Va a ser que NO</button>
+                <div class="discard" id="discardPile">Descartes</div>
+              </div>
+            </div>
+            <div class="log" id="log"></div>
+          </section>
+          <aside class="chat">
+            <div class="chat-messages" id="messages"></div>
+            <form id="chatForm">
+              <input id="chatInput" maxlength="240" placeholder="Mensaje..." />
+              <button>Enviar</button>
+            </form>
+          </aside>
+        </section>
+
+        <section class="hand-wrap">
+          <div class="hand-head">
+            <h3>Tu mano</h3>
+            <div class="hand-actions">
+              <div class="view-actions" aria-label="Vista de mano">
+                <button id="handFanBtn" data-view="fan">Abanico</button>
+                <button id="handRowBtn" data-view="row">Fila</button>
+                <button id="handGridBtn" data-view="grid">Tabla</button>
+              </div>
+              <button id="shuffleHandBtn">Mezclar mano</button>
+              <button id="comboThreeBtn">3 identicas</button>
+              <button id="comboFiveBtn">5 diferentes</button>
+            </div>
+          </div>
+          <div class="hand" id="hand"></div>
+        </section>
+      </section>
+    </main>
+
+    <div class="draw-stage hidden" id="drawStage">
+      <div class="draw-card" id="drawCard"></div>
+      <div class="boom" id="boom"></div>
+    </div>
+
+    <div class="turn-alert hidden" id="turnAlert"></div>
+
+    <dialog id="modal">
+      <form method="dialog" class="modal-card">
+        <h3 id="modalTitle"></h3>
+        <div id="modalBody"></div>
+        <menu id="modalActions"></menu>
+      </form>
+    </dialog>
+
+    <dialog id="cardViewer" class="card-viewer-dialog">
+      <form method="dialog" class="card-viewer">
+        <button type="button" class="viewer-close" id="cardViewerClose" aria-label="Cerrar">×</button>
+        <div class="viewer-image" id="cardViewerImage"></div>
+        <section class="viewer-copy">
+          <p class="viewer-kicker" id="cardViewerType"></p>
+          <h3 id="cardViewerTitle"></h3>
+          <p id="cardViewerDescription"></p>
+        </section>
+      </form>
+    </dialog>
+
+    <div class="custom-tooltip hidden" id="customTooltip"></div>
+
+    <div class="toast" id="toast"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>
